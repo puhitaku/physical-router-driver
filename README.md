@@ -7,10 +7,10 @@ This repository contains flask project for running motor-equipped network router
 
 Enjoy :stuck_out_tongue_winking_eye:
 
-## Requirements :boom: :boom:
+## Requirements :boom:
 
+ - :car::satellite: Wireless router with motors (maybe you have to modify routers heavily)
  - :penguin: OpenWrt 15.05.1 Chaos Calmer (older / newer firmware should run this)
  - :snake: Python 2.7.x
  - :moyai: Flask
- - :car::satellite: Wireless router with motors (maybe you have to modify routers heavily)
-
+ - :iphone: Smartphones for controlling the router with accelerometer
