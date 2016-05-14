@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <title>ROUTER TANK</title>
+    <link rel="stylesheet" href="./statics/jquery.mobile-1.0a2.min.css" />
+    <script src="./statics/jquery-1.4.4.min.js"></script>
+    <script src="./statics/jquery.mobile-1.0a2.min.js"></script>
+    <script>
+        $(function(){
+            var x = 0.0;
+            var y = 0.0;
+            var z = 0.0;
+            var state = "s";
+
+            window.addEventListener("devicemotion",function(evt){
+                x = evt.accelerationIncludingGravity.x; //横方向の傾斜
+                y = evt.accelerationIncludingGravity.y; //縦方法の傾斜
+                z = evt.accelerationIncludingGravity.z; //上下方向の傾斜
+                $("#result").html("x:"+x+"<br>y:"+y+"<br>z:"+z);
+                
+                if (z >= 0.0) {
+                    if (y <= 1.0 && state == "s") {
+                        $.ajax({url: "./f"});
+                        state = "f";
+                        $("#message").html("Forward.");
+                    } else if (y >= 3.0 && state == "f") {
+                        $.ajax({url: "./s"});
+                        state = "s";
+                        $("#message").html("Stop.");
+                    state = "s";
+                    }
+                    
+                    if (y >= 6.0 && state == "s") {
+                        $.ajax({url: "./b"});
+                        state = "b";
+                        $("#message").html("Back.");
+                    } else if (y <= 4.0 && state == "b") {
+                        $.ajax({url: "./s"});
+                        state = "s";
+                        $("#message").html("Stop.");
+                    }
+                } else if (state != "s") {
+                    $.ajax({url: "./s"});
+                    state = "s";
+                    $("#message").html("Stop.");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="maincontents">
+        <div data-role="header">
+            <h1>Gyro Controller experiment</h1>
+        </div>
+        <div data-role="content">
+            <output id="result">…</output>
+            <p></p>
+            <output id="message">No message.</output>
+        </div>
+    </div>
+</body>
+</html>
