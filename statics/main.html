@@ -21,11 +21,11 @@
                 $("#result").html("x:"+x+"<br>y:"+y+"<br>z:"+z);
                 
                 if (z >= 0.0) {
-                    if (y <= 1.0 && state == "s") {
+                    if (y <= 0.0 && state == "s") {
                         $.ajax({url: "./f"});
                         state = "f";
                         $("#message").html("Forward.");
-                    } else if (y >= 3.0 && state == "f") {
+                    } else if (y >= 2.0 && state == "f") {
                         $.ajax({url: "./s"});
                         state = "s";
                         $("#message").html("Stop.");
