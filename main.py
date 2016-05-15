@@ -33,7 +33,7 @@ def stop():
 @app.route('/b')
 def back():
     try:
-        out = subprocess.check_output(os.path.join('drive.sh b'), shell=True)
+        out = subprocess.check_output(os.path.join(here, 'drive.sh b'), shell=True)
     except subprocess.CalledProcessError as e:
         return 'NG: ' + unicode(e)
     return 'OK'
