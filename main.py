@@ -8,6 +8,7 @@ from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
+here = os.getcwd()
 
 @app.route('/')
 def hello():
@@ -16,7 +17,7 @@ def hello():
 @app.route('/f')
 def forward():
     try:
-        out = subprocess.check_output('~/drive.sh f', shell=True)
+        out = subprocess.check_output(os.path.join(here, 'drive.sh f'), shell=True)
     except subprocess.CalledProcessError as e:
         return 'NG: ' + unicode(e)
     return 'OK'
@@ -24,7 +25,7 @@ def forward():
 @app.route('/s')
 def stop():
     try:
-        out = subprocess.check_output('~/drive.sh s', shell=True)
+        out = subprocess.check_output(os.path.join(here, 'drive.sh s'), shell=True)
     except subprocess.CalledProcessError as e:
         return 'NG: ' + unicode(e)
     return 'OK'
@@ -32,7 +33,7 @@ def stop():
 @app.route('/b')
 def back():
     try:
-        out = subprocess.check_output('~/drive.sh b', shell=True)
+        out = subprocess.check_output(os.path.join('drive.sh b'), shell=True)
     except subprocess.CalledProcessError as e:
         return 'NG: ' + unicode(e)
     return 'OK'
